@@ -79,9 +79,7 @@ class App extends Component {
           </div>
         </div>
 
-        <div className="row">
-          {this.state.qrCodes.map((qrCode, index) => this.renderQrCode(qrCode, index))}
-        </div>
+        {this.state.qrCodes.map((qrCode, index) => this.renderQrCode(qrCode, index))}
       </div>
     );
   }
@@ -119,7 +117,7 @@ class App extends Component {
 
   renderQrCode = (qrCode, index) => {
     return (
-      <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+      <div key={index} className="row">
         <div className="qr-code-card">
           <div className="qr-code-card__heading">
             <div className="qr-code-card__label" title={qrCode}>
