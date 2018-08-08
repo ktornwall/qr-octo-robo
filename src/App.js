@@ -1,8 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import QrCode from './QrCode';
+import Barcode from 'react-barcode';
 
+import QrCode from './QrCode';
 import './App.css';
 
 class App extends Component {
@@ -10,9 +11,11 @@ class App extends Component {
     super(...props);
 
     let qrCodes = [];
+    let displayMode = 'qrcode';
 
     try {
       qrCodes = JSON.parse(localStorage.qrCodes);
+      displayMode = JSON.parse(localStorage.displayMode);
     } catch (err) {
       console.error(err);
     }
@@ -20,12 +23,22 @@ class App extends Component {
     this.state = {
       qrCodes,
       addQrCodeValue: '',
+      displayMode,
     };
   }
 
   saveCodesToStorage(qrCodes){
     try {
       localStorage.setItem('qrCodes', JSON.stringify(qrCodes));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  changeDisplayMode = (mode) => () => {
+    this.setState({ displayMode: mode });
+    try {
+      localStorage.setItem('displayMode', JSON.stringify(mode));
     } catch (err) {
       console.error(err);
     }
@@ -61,7 +74,7 @@ class App extends Component {
 
   renderHeader() {
     return (
-      <nav className="navbar navbar-inverse bg-primary">
+      <nav className="navbar navbar-dark bg-primary">
         <div className="container">
           <span className="navbar-brand">QR Octo Robo</span>
           <span className="navbar-text">a library of your QR codes</span>
@@ -74,6 +87,9 @@ class App extends Component {
     return (
       <div className="app__body container mt-4">
         <div className="row">
+          <div className="col-auto">
+            {this.renderBarcodeModeButtons()}
+          </div>
           <div className="col">
             {this.renderAddQrCodeForm()}
           </div>
@@ -94,6 +110,15 @@ class App extends Component {
         <a className="text-muted" href="https://github.com/ktornwall/qr-octo-robo">Get source code</a>
       </footer>
     )
+  }
+
+  renderBarcodeModeButtons() {
+    return (
+      <div className="btn-group" role="group" aria-label="Basic example">
+        <button type="button" className="btn btn-secondary" onClick={this.changeDisplayMode("qrcode")}>QR Code</button>
+        <button type="button" className="btn btn-secondary" onClick={this.changeDisplayMode("code128")}>CODE 128</button>
+      </div>
+    );
   }
 
   renderAddQrCodeForm() {
@@ -117,20 +142,33 @@ class App extends Component {
 
   renderQrCode = (qrCode, index) => {
     return (
-      <div key={index} className="row">
-        <div className="qr-code-card">
-          <div className="qr-code-card__heading">
-            <div className="qr-code-card__label" title={qrCode}>
-              {qrCode}
+      <div key={index} className="row justify-content-center">
+        <div className="col-sm-12 col-md-6">
+          <div className="qr-code-card">
+            <div className="qr-code-card__heading">
+              <div className="qr-code-card__label" title={qrCode}>
+                {qrCode}
+              </div>
+              <button onClick={this.removeQrCode(index)} type="button" className="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <button onClick={this.removeQrCode(index)} type="button" className="close" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <div className="qr-code-card__barcode d-flex justify-content-center">
+              { this.state.displayMode === "qrcode" ?
+                (
+                  <QrCode
+                    value={qrCode}
+                    size={150}
+                  />
+                ) :
+                (
+                  <Barcode
+                    value={qrCode}
+                  />
+                )
+              }
+            </div>
           </div>
-          <QrCode
-            value={qrCode}
-            size={150}
-          />
         </div>
       </div>
     );
