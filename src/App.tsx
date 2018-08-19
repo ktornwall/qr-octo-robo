@@ -50,7 +50,7 @@ class App extends React.Component<{}, State> {
             </div>
 
             <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
-              <BarcodeList barcodes={barcodes} />
+              <BarcodeList barcodes={barcodes} barcodeEncoding={barcodeType} />
             </div>
           </div>
         </div>
