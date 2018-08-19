@@ -1,0 +1,21 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.content-wrapper {
+  overflow-y: scroll;
+}
+
+.nav-wrapper {
+  margin: 0 -15px;
+  padding: 0 15px;
+  overflow-y: scroll;
+}
+
+.qrcode {
+  max-width: 200px;
+  max-height: 200px;
+}
