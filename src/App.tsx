@@ -1,56 +1,34 @@
 import * as React from "react";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 
-class App extends React.Component {
+export type BarcodeType = "qrcode" | "code128";
+
+const initialState = {
+  barcodeType: "qrcode" as BarcodeType,
+  barcodes: [] as string[]
+};
+type State = Readonly<typeof initialState>;
+
+class App extends React.Component<{}, State> {
+  public readonly state: State = initialState;
+
+  public updateBarcodeType = (type: BarcodeType) =>
+    this.setState({ barcodeType: type });
+
   public render() {
+    const { barcodeType } = this.state;
     return (
       <React.Fragment>
-        <header className="navbar navbar-dark bg-dark">
-          <span className="navbar-brand">QR Octo Robo</span>
-
-          <div
-            className="btn-group btn-group-sm"
-            role="group"
-            aria-label="Barcode Type"
-          >
-            <button type="button" className="btn btn-light">
-              QR Code
-            </button>
-            <button type="button" className="btn btn-secondary">
-              Code 128
-            </button>
-          </div>
-        </header>
+        <Header
+          barcodeType={barcodeType}
+          onBarcodeTypeChange={this.updateBarcodeType}
+        />
 
         <div className="container-fluid  d-flex flex-fill flex-column">
           <div className="row flex-fill align-items-stretch">
             <div className="col-12 col-md-4 col-xl-3  d-flex flex-column">
-              <form className="py-3 border-bottom">
-                <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Add New Barcode"
-                    aria-label="Add New Barcode"
-                    aria-describedby="add-button"
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-success"
-                      type="button"
-                      id="add-button"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </form>
-
-              <div className="flex-fill py-3">
-                <nav>
-                  <div className="py-2 pl-3">18CIN001-001</div>
-                  <div className="py-2 pl-3">18CIN001-002</div>
-                </nav>
-              </div>
+              <Sidebar />
             </div>
 
             <div className="col-12 col-md-8 col-xl-9 pl-md-5 align-self-stretch">
