@@ -3,7 +3,8 @@ import Barcode from "../Barcode";
 
 export interface IProps {
   barcodes: Barcode[];
-  onAddBarcode: (barcode: string) => any;
+  onAddBarcode: (barcode: Barcode) => any;
+  onDeleteBarcode: (barcode: Barcode) => any;
 }
 
 const initialState = {
@@ -22,8 +23,12 @@ class Sidebar extends React.Component<IProps, State> {
 
   public handleAddBarcode = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.onAddBarcode(this.state.barcodeInput);
+    this.props.onAddBarcode(new Barcode(this.state.barcodeInput));
     this.setState({ barcodeInput: "" });
+  };
+
+  public handleDeleteBarcode = (barcode: Barcode) => () => {
+    this.props.onDeleteBarcode(barcode);
   };
 
   public render() {
@@ -77,7 +82,12 @@ class Sidebar extends React.Component<IProps, State> {
       className="nav-item py-2 pl-3 d-flex align-items-baseline"
     >
       <span className="flex-fill">{barcode.value}</span>
-      <button className="btn btn-outline-danger">&times;</button>
+      <button
+        className="btn btn-outline-danger"
+        onClick={this.handleDeleteBarcode(barcode)}
+      >
+        &times;
+      </button>
     </li>
   );
 }

@@ -17,9 +17,15 @@ class App extends React.Component<{}, State> {
   public updateBarcodeType = (type: BarcodeEncoding) =>
     this.setState({ barcodeType: type });
 
-  public addBarcode = (barcode: string) => {
+  public addBarcode = (barcode: Barcode) => {
     this.setState({
-      barcodes: [...this.state.barcodes, new Barcode(barcode)]
+      barcodes: [...this.state.barcodes, barcode]
+    });
+  };
+
+  public deleteBarcode = (barcode: Barcode) => {
+    this.setState({
+      barcodes: this.state.barcodes.filter(b => b !== barcode)
     });
   };
 
@@ -35,7 +41,11 @@ class App extends React.Component<{}, State> {
         <div className="container-fluid  d-flex flex-fill flex-column">
           <div className="row flex-fill align-items-stretch">
             <div className="col-12 col-md-4 col-xl-3  border-right  d-flex flex-column">
-              <Sidebar barcodes={barcodes} onAddBarcode={this.addBarcode} />
+              <Sidebar
+                barcodes={barcodes}
+                onAddBarcode={this.addBarcode}
+                onDeleteBarcode={this.deleteBarcode}
+              />
             </div>
 
             <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
