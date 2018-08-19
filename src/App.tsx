@@ -57,7 +57,7 @@ class App extends React.Component<{}, State> {
           </div>
         </div>
 
-        <footer className="navbar fixed-bottom navbar-light bg-light justify-content-center align-items-center">
+        <footer className="navbar navbar-light bg-light justify-content-center align-items-center">
           <div>
             Made with &#x2764; by{" "}
             <a className="text-muted" href="https://twitter.com/derkatzenbar">
