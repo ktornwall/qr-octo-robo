@@ -7,35 +7,81 @@ import Sidebar from "./containers/Sidebar";
 export type BarcodeEncoding = "qrcode" | "code128";
 
 const initialState = {
-  barcodeType: "qrcode" as BarcodeEncoding,
+  barcodeEncoding: "qrcode" as BarcodeEncoding,
   barcodes: [] as Barcode[]
 };
 type State = Readonly<typeof initialState>;
 
 class App extends React.Component<{}, State> {
-  public readonly state: State = initialState;
+  public state: State = initialState;
+
+  constructor(props: {}) {
+    super(props);
+
+    let savedBarcodes = [] as string[];
+    let barcodeEncoding = "qrcode";
+
+    try {
+      savedBarcodes =
+        JSON.parse(localStorage.getItem("qrCodes") || "null") || [];
+      barcodeEncoding =
+        JSON.parse(localStorage.getItem("displayMode") || "null") || "qrcode";
+    } catch (err) {
+      // tslint:disable-next-line:no-console
+      console.error(err);
+    }
+
+    const barcodes = savedBarcodes.map(b => new Barcode(b));
+
+    this.state = {
+      barcodeEncoding: barcodeEncoding as BarcodeEncoding,
+      barcodes
+    };
+  }
+
+  public saveStateToStorage = () => {
+    try {
+      localStorage.setItem(
+        "qrCodes",
+        JSON.stringify(this.state.barcodes.map(b => b.value))
+      );
+      localStorage.setItem(
+        "displayMode",
+        JSON.stringify(this.state.barcodeEncoding)
+      );
+    } catch (err) {
+      // tslint:disable-next-line:no-console
+      console.error(err);
+    }
+  };
 
   public updateBarcodeType = (type: BarcodeEncoding) =>
-    this.setState({ barcodeType: type });
+    this.setState({ barcodeEncoding: type }, this.saveStateToStorage);
 
   public addBarcode = (barcode: Barcode) => {
-    this.setState({
-      barcodes: [...this.state.barcodes, barcode]
-    });
+    this.setState(
+      {
+        barcodes: [...this.state.barcodes, barcode]
+      },
+      this.saveStateToStorage
+    );
   };
 
   public deleteBarcode = (barcode: Barcode) => {
-    this.setState({
-      barcodes: this.state.barcodes.filter(b => b !== barcode)
-    });
+    this.setState(
+      {
+        barcodes: this.state.barcodes.filter(b => b !== barcode)
+      },
+      this.saveStateToStorage
+    );
   };
 
   public render() {
-    const { barcodeType, barcodes } = this.state;
+    const { barcodeEncoding, barcodes } = this.state;
     return (
       <React.Fragment>
         <Header
-          barcodeType={barcodeType}
+          barcodeEncoding={barcodeEncoding}
           onBarcodeTypeChange={this.updateBarcodeType}
         />
 
@@ -50,7 +96,10 @@ class App extends React.Component<{}, State> {
             </div>
 
             <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
-              <BarcodeList barcodes={barcodes} barcodeEncoding={barcodeType} />
+              <BarcodeList
+                barcodes={barcodes}
+                barcodeEncoding={barcodeEncoding}
+              />
             </div>
           </div>
         </div>

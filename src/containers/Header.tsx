@@ -7,7 +7,7 @@ import RadioButtonGroup, {
 import HeaderIcon from "./HeaderIcon.png";
 
 export interface IProps {
-  barcodeType: BarcodeEncoding;
+  barcodeEncoding: BarcodeEncoding;
   onBarcodeTypeChange: (type: BarcodeEncoding) => any;
 }
 
@@ -29,7 +29,7 @@ class Header extends React.Component<IProps> {
     this.props.onBarcodeTypeChange(barcodeTypeOption.id);
 
   public render() {
-    const { barcodeType } = this.props;
+    const { barcodeEncoding } = this.props;
 
     return (
       <header className="navbar navbar-dark bg-dark  flex-shrink-0 align-items-center">
@@ -44,7 +44,7 @@ class Header extends React.Component<IProps> {
           buttonSize="sm"
           options={barcodeTypeOptions}
           onChange={this.handleBarcodeTypeChange}
-          value={barcodeType}
+          value={barcodeEncoding}
         />
       </header>
     );
