@@ -37,7 +37,7 @@ class App extends React.Component<{}, State> {
               <Sidebar barcodes={barcodes} onAddBarcode={this.addBarcode} />
             </div>
 
-            <div className="col-12 col-md-8 col-xl-9 pl-md-5 align-self-stretch u-scroll-vertical-overflow">
+            <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
               <div className="row">
                 {barcodes.map(barcode => (
                   <div key={barcode} className="col-12 col-md-6 col-xl-4 my-3">

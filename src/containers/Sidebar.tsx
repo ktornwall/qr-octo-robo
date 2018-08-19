@@ -32,14 +32,10 @@ class Sidebar extends React.Component<IProps, State> {
       <React.Fragment>
         {this.renderNewBarcodeForm()}
 
-        <div className="flex-fill py-3 u-scroll-vertical-overflow">
-          <nav>
-            {barcodes.map(barcode => (
-              <div key={barcode} className="py-2 pl-3">
-                {barcode}
-              </div>
-            ))}
-          </nav>
+        <div className="flex-fill py-3 nav-wrapper">
+          <ul className="nav flex-column">
+            {barcodes.map(this.renderNavigationBarcode)}
+          </ul>
         </div>
       </React.Fragment>
     );
@@ -73,6 +69,16 @@ class Sidebar extends React.Component<IProps, State> {
       </form>
     );
   };
+
+  private renderNavigationBarcode = (barcode: string) => (
+    <li
+      key={barcode}
+      className="nav-item py-2 pl-3 d-flex align-items-baseline"
+    >
+      <span className="flex-fill">{barcode}</span>
+      <button className="btn btn-outline-danger">&times;</button>
+    </li>
+  );
 }
 
 export default Sidebar;

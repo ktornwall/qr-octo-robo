@@ -5,6 +5,12 @@ body,
   width: 100%;
 }
 
-.u-scroll-vertical-overflow {
+.content-wrapper {
+  overflow-y: scroll;
+}
+
+.nav-wrapper {
+  margin: 0 -15px;
+  padding: 0 15px;
   overflow-y: scroll;
 }
