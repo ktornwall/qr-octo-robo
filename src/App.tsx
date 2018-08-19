@@ -1,6 +1,6 @@
 import * as React from "react";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
+import Header from "./containers/Header";
+import Sidebar from "./containers/Sidebar";
 
 export type BarcodeType = "qrcode" | "code128";
 
@@ -16,8 +16,14 @@ class App extends React.Component<{}, State> {
   public updateBarcodeType = (type: BarcodeType) =>
     this.setState({ barcodeType: type });
 
+  public addBarcode = (barcode: string) => {
+    this.setState({
+      barcodes: [...this.state.barcodes, barcode]
+    });
+  };
+
   public render() {
-    const { barcodeType } = this.state;
+    const { barcodeType, barcodes } = this.state;
     return (
       <React.Fragment>
         <Header
@@ -27,47 +33,25 @@ class App extends React.Component<{}, State> {
 
         <div className="container-fluid  d-flex flex-fill flex-column">
           <div className="row flex-fill align-items-stretch">
-            <div className="col-12 col-md-4 col-xl-3  d-flex flex-column">
-              <Sidebar />
+            <div className="col-12 col-md-4 col-xl-3  border-right  d-flex flex-column">
+              <Sidebar barcodes={barcodes} onAddBarcode={this.addBarcode} />
             </div>
 
             <div className="col-12 col-md-8 col-xl-9 pl-md-5 align-self-stretch">
               <div className="row">
-                <div className="col-12 col-md-6 col-xl-4 my-3">
-                  <div className="card">
-                    <div className="card-header d-flex align-items-baseline">
-                      <span className="flex-fill">18CIN001-001</span>
-                      <button className="btn btn-sm btn-outline-danger">
-                        &times;
-                      </button>
+                {barcodes.map(barcode => (
+                  <div key={barcode} className="col-12 col-md-6 col-xl-4 my-3">
+                    <div className="card">
+                      <div className="card-header d-flex align-items-baseline">
+                        <span className="flex-fill">{barcode}</span>
+                        <button className="btn btn-sm btn-outline-danger">
+                          &times;
+                        </button>
+                      </div>
+                      <div className="card-body">THIS IS A QR CODE</div>
                     </div>
-                    <div className="card-body">THIS IS A QR CODE</div>
                   </div>
-                </div>
-
-                <div className="col-12 col-md-6 col-xl-4 my-3">
-                  <div className="card">
-                    <div className="card-header d-flex align-items-baseline">
-                      <span className="flex-fill">18CIN001-001</span>
-                      <button className="btn btn-sm btn-outline-danger">
-                        &times;
-                      </button>
-                    </div>
-                    <div className="card-body">THIS IS A QR CODE</div>
-                  </div>
-                </div>
-
-                <div className="col-12 col-md-6 col-xl-4 my-3">
-                  <div className="card">
-                    <div className="card-header d-flex align-items-baseline">
-                      <span className="flex-fill">18CIN001-001</span>
-                      <button className="btn btn-sm btn-outline-danger">
-                        &times;
-                      </button>
-                    </div>
-                    <div className="card-body">THIS IS A QR CODE</div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
