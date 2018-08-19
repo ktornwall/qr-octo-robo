@@ -1,5 +1,6 @@
 import * as React from "react";
 import Barcode from "./Barcode";
+import BarcodeList from "./containers/BarcodeList";
 import Header from "./containers/Header";
 import Sidebar from "./containers/Sidebar";
 
@@ -49,24 +50,7 @@ class App extends React.Component<{}, State> {
             </div>
 
             <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
-              <div className="row">
-                {barcodes.map(barcode => (
-                  <div
-                    key={barcode.id}
-                    className="col-12 col-md-6 col-xl-4 my-3"
-                  >
-                    <div className="card">
-                      <div className="card-header d-flex align-items-baseline">
-                        <span className="flex-fill">{barcode.value}</span>
-                        <button className="btn btn-sm btn-outline-danger">
-                          &times;
-                        </button>
-                      </div>
-                      <div className="card-body">THIS IS A QR CODE</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <BarcodeList barcodes={barcodes} />
             </div>
           </div>
         </div>
@@ -77,12 +61,6 @@ class App extends React.Component<{}, State> {
             <a className="text-muted" href="https://twitter.com/derkatzenbar">
               @DerKatzenbar
             </a>
-            <strong className="mx-2">&middot;</strong>
-            Thanks to{" "}
-            <a className="text-muted" href="https://github.com/neocotic/qrious">
-              QRious
-            </a>{" "}
-            for QR code generation
             <strong className="mx-2">&middot;</strong>
             <a
               className="text-muted"
