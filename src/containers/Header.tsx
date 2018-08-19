@@ -1,15 +1,15 @@
 import * as React from "react";
-import { BarcodeType } from "../App";
+import { BarcodeEncoding } from "../App";
 import RadioButtonGroup, {
   IRadioButtonGroupOption
 } from "../components/RadioButtonGroup";
 
 export interface IProps {
-  barcodeType: BarcodeType;
-  onBarcodeTypeChange: (type: BarcodeType) => any;
+  barcodeType: BarcodeEncoding;
+  onBarcodeTypeChange: (type: BarcodeEncoding) => any;
 }
 
-type RadioButtonOption = IRadioButtonGroupOption<BarcodeType>;
+type RadioButtonOption = IRadioButtonGroupOption<BarcodeEncoding>;
 
 const barcodeTypeOptions: RadioButtonOption[] = [
   {

@@ -1,24 +1,25 @@
 import * as React from "react";
+import Barcode from "./Barcode";
 import Header from "./containers/Header";
 import Sidebar from "./containers/Sidebar";
 
-export type BarcodeType = "qrcode" | "code128";
+export type BarcodeEncoding = "qrcode" | "code128";
 
 const initialState = {
-  barcodeType: "qrcode" as BarcodeType,
-  barcodes: [] as string[]
+  barcodeType: "qrcode" as BarcodeEncoding,
+  barcodes: [] as Barcode[]
 };
 type State = Readonly<typeof initialState>;
 
 class App extends React.Component<{}, State> {
   public readonly state: State = initialState;
 
-  public updateBarcodeType = (type: BarcodeType) =>
+  public updateBarcodeType = (type: BarcodeEncoding) =>
     this.setState({ barcodeType: type });
 
   public addBarcode = (barcode: string) => {
     this.setState({
-      barcodes: [...this.state.barcodes, barcode]
+      barcodes: [...this.state.barcodes, new Barcode(barcode)]
     });
   };
 
@@ -40,10 +41,13 @@ class App extends React.Component<{}, State> {
             <div className="content-wrapper col-12 col-md-8 col-xl-9 pl-md-5">
               <div className="row">
                 {barcodes.map(barcode => (
-                  <div key={barcode} className="col-12 col-md-6 col-xl-4 my-3">
+                  <div
+                    key={barcode.id}
+                    className="col-12 col-md-6 col-xl-4 my-3"
+                  >
                     <div className="card">
                       <div className="card-header d-flex align-items-baseline">
-                        <span className="flex-fill">{barcode}</span>
+                        <span className="flex-fill">{barcode.value}</span>
                         <button className="btn btn-sm btn-outline-danger">
                           &times;
                         </button>

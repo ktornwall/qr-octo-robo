@@ -1,7 +1,8 @@
 import * as React from "react";
+import Barcode from "../Barcode";
 
 export interface IProps {
-  barcodes: string[];
+  barcodes: Barcode[];
   onAddBarcode: (barcode: string) => any;
 }
 
@@ -70,12 +71,12 @@ class Sidebar extends React.Component<IProps, State> {
     );
   };
 
-  private renderNavigationBarcode = (barcode: string) => (
+  private renderNavigationBarcode = (barcode: Barcode) => (
     <li
-      key={barcode}
+      key={barcode.id}
       className="nav-item py-2 pl-3 d-flex align-items-baseline"
     >
-      <span className="flex-fill">{barcode}</span>
+      <span className="flex-fill">{barcode.value}</span>
       <button className="btn btn-outline-danger">&times;</button>
     </li>
   );
