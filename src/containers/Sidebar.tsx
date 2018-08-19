@@ -5,6 +5,7 @@ export interface IProps {
   barcodes: Barcode[];
   onAddBarcode: (barcode: Barcode) => any;
   onDeleteBarcode: (barcode: Barcode) => any;
+  onDeleteAllBarcodes: () => any;
 }
 
 const initialState = {
@@ -36,7 +37,16 @@ class Sidebar extends React.Component<IProps, State> {
 
     return (
       <React.Fragment>
-        {this.renderNewBarcodeForm()}
+        <div className="border-bottom">
+          {this.renderNewBarcodeForm()}
+          <button
+            type="button"
+            className="btn btn-block btn-outline-danger mb-3"
+            onClick={this.props.onDeleteAllBarcodes}
+          >
+            &times; Clear All
+          </button>
+        </div>
 
         <div className="flex-fill py-3 nav-wrapper">
           <ul className="nav flex-column">
@@ -51,7 +61,7 @@ class Sidebar extends React.Component<IProps, State> {
     const { barcodeInput } = this.state;
 
     return (
-      <form className="py-3 border-bottom" onSubmit={this.handleAddBarcode}>
+      <form className="py-3" onSubmit={this.handleAddBarcode}>
         <div className="input-group">
           <input
             type="text"
@@ -63,11 +73,7 @@ class Sidebar extends React.Component<IProps, State> {
             onChange={this.handleBarcodeInputChange}
           />
           <div className="input-group-append">
-            <button
-              className="btn btn-outline-success"
-              type="buitton"
-              id="add-button"
-            >
+            <button className="btn btn-primary" type="button" id="add-button">
               +
             </button>
           </div>

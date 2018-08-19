@@ -76,6 +76,17 @@ class App extends React.Component<{}, State> {
     );
   };
 
+  public deleteAllBarcodes = () => {
+    if (window.confirm("Are you sure you want to delete all barcodes?")) {
+      this.setState(
+        {
+          barcodes: []
+        },
+        this.saveStateToStorage
+      );
+    }
+  };
+
   public render() {
     const { barcodeEncoding, barcodes } = this.state;
     return (
@@ -92,6 +103,7 @@ class App extends React.Component<{}, State> {
                 barcodes={barcodes}
                 onAddBarcode={this.addBarcode}
                 onDeleteBarcode={this.deleteBarcode}
+                onDeleteAllBarcodes={this.deleteAllBarcodes}
               />
             </div>
 
