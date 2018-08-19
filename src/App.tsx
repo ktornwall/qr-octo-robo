@@ -37,7 +37,7 @@ class App extends React.Component<{}, State> {
               <Sidebar barcodes={barcodes} onAddBarcode={this.addBarcode} />
             </div>
 
-            <div className="col-12 col-md-8 col-xl-9 pl-md-5 align-self-stretch">
+            <div className="col-12 col-md-8 col-xl-9 pl-md-5 align-self-stretch u-scroll-vertical-overflow">
               <div className="row">
                 {barcodes.map(barcode => (
                   <div key={barcode} className="col-12 col-md-6 col-xl-4 my-3">
@@ -57,7 +57,7 @@ class App extends React.Component<{}, State> {
           </div>
         </div>
 
-        <footer className="navbar navbar-light bg-light justify-content-center align-items-center">
+        <footer className="d-none d-md-flex navbar navbar-light bg-light  justify-content-center align-items-center flex-shrink-0">
           <div>
             Made with &#x2764; by{" "}
             <a className="text-muted" href="https://twitter.com/derkatzenbar">

@@ -32,7 +32,7 @@ class Sidebar extends React.Component<IProps, State> {
       <React.Fragment>
         {this.renderNewBarcodeForm()}
 
-        <div className="flex-fill py-3">
+        <div className="flex-fill py-3 u-scroll-vertical-overflow">
           <nav>
             {barcodes.map(barcode => (
               <div key={barcode} className="py-2 pl-3">

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { BarcodeType } from "../App";
-import RadioButtonGroup, { IRadioButtonGroupOption } from "../components/RadioButtonGroup";
+import RadioButtonGroup, {
+  IRadioButtonGroupOption
+} from "../components/RadioButtonGroup";
 
 export interface IProps {
   barcodeType: BarcodeType;
@@ -28,7 +30,7 @@ class Header extends React.Component<IProps> {
     const { barcodeType } = this.props;
 
     return (
-      <header className="navbar navbar-dark bg-dark">
+      <header className="navbar navbar-dark bg-dark  flex-shrink-0">
         <span className="navbar-brand">QR Octo Robo</span>
 
         <RadioButtonGroup
