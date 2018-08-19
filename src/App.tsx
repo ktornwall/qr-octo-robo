@@ -77,12 +77,14 @@ class App extends React.Component<{}, State> {
   };
 
   public deleteAllBarcodes = () => {
-    this.setState(
-      {
-        barcodes: []
-      },
-      this.saveStateToStorage
-    );
+    if (window.confirm("Are you sure you want to delete all barcodes?")) {
+      this.setState(
+        {
+          barcodes: []
+        },
+        this.saveStateToStorage
+      );
+    }
   };
 
   public render() {
