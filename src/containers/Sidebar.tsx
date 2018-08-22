@@ -73,7 +73,7 @@ class Sidebar extends React.Component<IProps, State> {
             onChange={this.handleBarcodeInputChange}
           />
           <div className="input-group-append">
-            <button className="btn btn-primary" type="button" id="add-button">
+            <button type="submit" className="btn btn-primary" id="add-button">
               +
             </button>
           </div>
@@ -89,6 +89,7 @@ class Sidebar extends React.Component<IProps, State> {
     >
       <span className="flex-fill">{barcode.value}</span>
       <button
+        type="button"
         className="btn btn-outline-danger"
         onClick={this.handleDeleteBarcode(barcode)}
       >
