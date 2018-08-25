@@ -5,14 +5,20 @@ import Barcode from "../Barcode";
 
 export interface IProps {
   barcode: Barcode;
+  id: string;
 }
 
 class QrBarcodeCard extends React.Component<IProps> {
   public render() {
-    const { barcode } = this.props;
+    const { barcode, id } = this.props;
+    const classes = ["card border-secondary"];
+    if (barcode.isSelected) {
+      classes.push("is-selected");
+    }
+
     return (
-      <div className="col-12 col-md-6 col-lg-4 my-3">
-        <div className="card border-secondary">
+      <div id={id} className="col-12 col-md-6 col-lg-4 my-3">
+        <div className={classes.join(" ")}>
           <div className="card-header py-2">{barcode.value}</div>
           <div className="card-body  d-flex justify-content-center">
             <div className="qrcode flex-fill">

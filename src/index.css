@@ -11,11 +11,40 @@ body,
 
 .nav-wrapper {
   margin: 0 -15px;
-  padding: 0 15px;
   overflow-y: scroll;
 }
 
 .qrcode {
   max-width: 200px;
   max-height: 200px;
+}
+
+.barcode-nav-item {
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.barcode-nav-item:hover {
+  background-color: #f8f9fa;
+}
+
+.is-selected {
+  animation: animated_highlighted 500ms ease-out 1;
+}
+
+@keyframes animated_highlighted {
+  0% {
+    box-shadow: 0 0 0 rgba(120, 120, 120, 0);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 3px 3px rgba(120, 120, 120, 0.5);
+    transform: scale(1.04);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(120, 120, 120, 0);
+    transform: scale(1);
+  }
 }

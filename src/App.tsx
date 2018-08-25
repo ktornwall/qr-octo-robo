@@ -87,6 +87,35 @@ class App extends React.Component<{}, State> {
     }
   };
 
+  public scrollToBarcode = (barcode: Barcode) => {
+    const elem = document.getElementById(`barcode-${barcode.id}`);
+    if (elem) {
+      elem.scrollIntoView();
+    }
+
+    this.setState({
+      barcodes: this.state.barcodes.map(b => {
+        if (b.id === barcode.id) {
+          return new Barcode(b.value, b.id, true);
+        } else {
+          return b;
+        }
+      })
+    });
+
+    setTimeout(() => {
+      this.setState({
+        barcodes: this.state.barcodes.map(b => {
+          if (b.id === barcode.id) {
+            return new Barcode(b.value, b.id, false);
+          } else {
+            return b;
+          }
+        })
+      });
+    }, 750);
+  };
+
   public render() {
     const { barcodeEncoding, barcodes } = this.state;
     return (
@@ -104,6 +133,7 @@ class App extends React.Component<{}, State> {
                 onAddBarcode={this.addBarcode}
                 onDeleteBarcode={this.deleteBarcode}
                 onDeleteAllBarcodes={this.deleteAllBarcodes}
+                onScrollToBarcode={this.scrollToBarcode}
               />
             </div>
 
