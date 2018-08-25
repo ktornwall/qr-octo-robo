@@ -35,10 +35,12 @@ class RadioButtonGroup<T> extends React.Component<IProps<T>> {
 
   private renderOption = (option: IRadioButtonGroupOption<T>) => {
     const { value, activeClass, buttonColor } = this.props;
-    const buttonClasses = ["btn", `btn-${buttonColor}`];
+    const buttonClasses = ["btn"];
 
     if (option.id === value) {
       buttonClasses.push(activeClass);
+    } else {
+      buttonClasses.push(`btn-${buttonColor}`);
     }
 
     return (

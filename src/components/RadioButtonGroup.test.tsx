@@ -12,7 +12,7 @@ const baseProps = {
       label: "First"
     }
   ],
-  value: 1
+  value: 0
 };
 
 describe("<RadioButtonGroup />", () => {
@@ -50,7 +50,11 @@ describe("<RadioButtonGroup />", () => {
 
   it("Changes the active class", () => {
     const wrapper = enzyme.shallow(
-      <RadioButtonGroup {...baseProps} activeClass="custom-active-class" />
+      <RadioButtonGroup
+        {...baseProps}
+        value={1}
+        activeClass="custom-active-class"
+      />
     );
     expect(wrapper.find("button.custom-active-class")).toHaveLength(1);
   });

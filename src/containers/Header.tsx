@@ -39,8 +39,8 @@ class Header extends React.Component<IProps> {
         </span>
 
         <RadioButtonGroup
-          activeClass="btn-light"
-          buttonColor="secondary"
+          activeClass="btn-primary"
+          buttonColor="light"
           buttonSize="sm"
           options={barcodeTypeOptions}
           onChange={this.handleBarcodeTypeChange}
