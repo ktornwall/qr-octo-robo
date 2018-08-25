@@ -21,7 +21,11 @@ class BarcodeList extends React.Component<IProps> {
     return (
       <div className="row">
         {barcodes.map(barcode => (
-          <BarcodeRenderer key={barcode.id} barcode={barcode} />
+          <BarcodeRenderer
+            key={barcode.id}
+            id={`barcode-${barcode.id}`}
+            barcode={barcode}
+          />
         ))}
       </div>
     );

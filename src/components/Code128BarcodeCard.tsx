@@ -4,13 +4,14 @@ import Barcode from "../Barcode";
 
 export interface IProps {
   barcode: Barcode;
+  id: string;
 }
 
 class Code128BarcodeCard extends React.Component<IProps> {
   public render() {
-    const { barcode } = this.props;
+    const { barcode, id } = this.props;
     return (
-      <div className="col-12 my-3">
+      <div id={id} className="col-12 my-3">
         <div className="card border-secondary">
           <div className="card-header py-2">{barcode.value}</div>
           <div className="card-body  d-flex justify-content-center">

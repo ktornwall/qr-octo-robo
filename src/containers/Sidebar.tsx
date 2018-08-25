@@ -6,6 +6,7 @@ export interface IProps {
   onAddBarcode: (barcode: Barcode) => any;
   onDeleteBarcode: (barcode: Barcode) => any;
   onDeleteAllBarcodes: () => any;
+  onScrollToBarcode: (barcode: Barcode) => any;
 }
 
 const initialState = {
@@ -30,6 +31,10 @@ class Sidebar extends React.Component<IProps, State> {
 
   public handleDeleteBarcode = (barcode: Barcode) => () => {
     this.props.onDeleteBarcode(barcode);
+  };
+
+  public handleScrollToBarcode = (barcode: Barcode) => () => {
+    this.props.onScrollToBarcode(barcode);
   };
 
   public render() {
@@ -85,7 +90,8 @@ class Sidebar extends React.Component<IProps, State> {
   private renderNavigationBarcode = (barcode: Barcode) => (
     <li
       key={barcode.id}
-      className="nav-item py-2 pl-3 d-flex align-items-baseline"
+      className="nav-item barcode-nav-item py-2 pl-3 d-flex align-items-baseline"
+      onClick={this.handleScrollToBarcode(barcode)}
     >
       <span className="flex-fill">{barcode.value}</span>
       <button
