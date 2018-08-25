@@ -59,6 +59,10 @@ class App extends React.Component<{}, State> {
     this.setState({ barcodeEncoding: type }, this.saveStateToStorage);
 
   public addBarcode = (barcode: Barcode) => {
+    if (barcode.value === "") {
+      return;
+    }
+
     this.setState(
       {
         barcodes: [...this.state.barcodes, barcode]
