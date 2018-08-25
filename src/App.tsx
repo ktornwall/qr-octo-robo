@@ -92,6 +92,28 @@ class App extends React.Component<{}, State> {
     if (elem) {
       elem.scrollIntoView();
     }
+
+    this.setState({
+      barcodes: this.state.barcodes.map(b => {
+        if (b.id === barcode.id) {
+          return new Barcode(b.value, b.id, true);
+        } else {
+          return b;
+        }
+      })
+    });
+
+    setTimeout(() => {
+      this.setState({
+        barcodes: this.state.barcodes.map(b => {
+          if (b.id === barcode.id) {
+            return new Barcode(b.value, b.id, false);
+          } else {
+            return b;
+          }
+        })
+      });
+    }, 750);
   };
 
   public render() {

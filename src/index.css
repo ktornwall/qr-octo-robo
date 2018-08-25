@@ -27,3 +27,24 @@ body,
 .barcode-nav-item:hover {
   background-color: #f8f9fa;
 }
+
+.is-selected {
+  animation: animated_highlighted 500ms ease-out 1;
+}
+
+@keyframes animated_highlighted {
+  0% {
+    box-shadow: 0 0 0 rgba(120, 120, 120, 0);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 3px 3px rgba(120, 120, 120, 0.5);
+    transform: scale(1.04);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(120, 120, 120, 0);
+    transform: scale(1);
+  }
+}
