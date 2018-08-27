@@ -29,7 +29,10 @@ class Sidebar extends React.Component<IProps, State> {
     this.setState({ barcodeInput: "" });
   };
 
-  public handleDeleteBarcode = (barcode: Barcode) => () => {
+  public handleDeleteBarcode = (barcode: Barcode) => (
+    event: React.SyntheticEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
     this.props.onDeleteBarcode(barcode);
   };
 
