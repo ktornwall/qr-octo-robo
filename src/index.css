@@ -7,6 +7,12 @@ body,
 
 .content-wrapper {
   overflow-y: scroll;
+  max-height: 100%;
+  height: 100%;
+}
+
+.sidebar-wrapper {
+  height: 100%;
 }
 
 .nav-wrapper {

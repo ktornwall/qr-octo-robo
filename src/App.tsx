@@ -8,7 +8,7 @@ export type BarcodeEncoding = "qrcode" | "code128";
 
 const initialState = {
   barcodeEncoding: "qrcode" as BarcodeEncoding,
-  barcodes: [] as Barcode[]
+  barcodes: [] as Barcode[],
 };
 type State = Readonly<typeof initialState>;
 
@@ -35,7 +35,7 @@ class App extends React.Component<{}, State> {
 
     this.state = {
       barcodeEncoding: barcodeEncoding as BarcodeEncoding,
-      barcodes
+      barcodes,
     };
   }
 
@@ -65,7 +65,7 @@ class App extends React.Component<{}, State> {
 
     this.setState(
       {
-        barcodes: [...this.state.barcodes, barcode]
+        barcodes: [...this.state.barcodes, barcode],
       },
       this.saveStateToStorage
     );
@@ -74,7 +74,7 @@ class App extends React.Component<{}, State> {
   public deleteBarcode = (barcode: Barcode) => {
     this.setState(
       {
-        barcodes: this.state.barcodes.filter(b => b !== barcode)
+        barcodes: this.state.barcodes.filter(b => b !== barcode),
       },
       this.saveStateToStorage
     );
@@ -84,7 +84,7 @@ class App extends React.Component<{}, State> {
     if (window.confirm("Are you sure you want to delete all barcodes?")) {
       this.setState(
         {
-          barcodes: []
+          barcodes: [],
         },
         this.saveStateToStorage
       );
@@ -104,7 +104,7 @@ class App extends React.Component<{}, State> {
         } else {
           return b;
         }
-      })
+      }),
     });
 
     setTimeout(() => {
@@ -115,7 +115,7 @@ class App extends React.Component<{}, State> {
           } else {
             return b;
           }
-        })
+        }),
       });
     }, 750);
   };
@@ -131,7 +131,7 @@ class App extends React.Component<{}, State> {
 
         <div className="container-fluid  d-flex flex-fill flex-column">
           <div className="row flex-fill align-items-stretch">
-            <div className="col-12 col-md-4 col-xl-3  border-right  d-flex flex-column">
+            <div className="sidebar-wrapper col-12 col-md-4 col-xl-3  border-right  d-flex flex-column">
               <Sidebar
                 barcodes={barcodes}
                 onAddBarcode={this.addBarcode}
