@@ -10,9 +10,7 @@ const NavBar: React.FunctionComponent<{}> = () => {
   const [navExpanded, setNavExpanded] = useState(false);
 
   const mobileMenuClassNames = classnames(
-    {
-      hidden: !navExpanded,
-    },
+    navExpanded ? "block" : "hidden",
     "sm:hidden"
   );
 
@@ -88,7 +86,7 @@ const NavBar: React.FunctionComponent<{}> = () => {
       </div>
 
       <div className={mobileMenuClassNames}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
+        <div className="flex flex-col px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (
             <NavBarLink textSize="base" key={item.label} {...item} />
           ))}
