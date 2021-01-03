@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 
-import { ReactComponent as LogoSvg } from "./logo.svg";
+import { ReactComponent as LogoSvg } from "../logo.svg";
 import NavBarLink from "./NavBarLink";
+import { useLocation } from "react-router";
 
-const navItems = [{ label: "Library" }, { label: "Settings" }];
+const navItems = [
+  { label: "Library", path: "/" },
+  { label: "Settings", path: "/settings" },
+];
 
 const NavBar: React.FunctionComponent<{}> = () => {
   const [navExpanded, setNavExpanded] = useState(false);
+  const location = useLocation();
 
   const mobileMenuClassNames = classnames(
     navExpanded ? "block" : "hidden",
@@ -18,9 +23,13 @@ const NavBar: React.FunctionComponent<{}> = () => {
     setNavExpanded(!navExpanded);
   };
 
+  const handleNavLinkClicked = () => {
+    setNavExpanded(false);
+  };
+
   return (
     <nav className="fixed w-screen bg-gray-800 shadow-md z-50 md:z-0">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto px-2 px-6">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0 flex items-center">
@@ -77,7 +86,13 @@ const NavBar: React.FunctionComponent<{}> = () => {
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
                 {navItems.map((item) => (
-                  <NavBarLink textSize="sm" key={item.label} {...item} />
+                  <NavBarLink
+                    textSize="sm"
+                    key={item.label}
+                    isActive={location.pathname === item.path}
+                    onClick={handleNavLinkClicked}
+                    {...item}
+                  />
                 ))}
               </div>
             </div>
@@ -88,7 +103,13 @@ const NavBar: React.FunctionComponent<{}> = () => {
       <div className={mobileMenuClassNames}>
         <div className="flex flex-col px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (
-            <NavBarLink textSize="base" key={item.label} {...item} />
+            <NavBarLink
+              textSize="base"
+              key={item.label}
+              isActive={location.pathname === item.path}
+              onClick={handleNavLinkClicked}
+              {...item}
+            />
           ))}
         </div>
       </div>
