@@ -4,8 +4,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap");
 
-html,
 body {
-  @apply h-full;
   @apply bg-gray-100;
 }

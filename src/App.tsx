@@ -1,11 +1,15 @@
 import React from "react";
 import TopNav from "./NavBar";
+import LibraryPage from "./pages/LibraryPage";
 
 const App: React.FunctionComponent<{}> = () => {
   return (
-    <div>
+    <>
       <TopNav />
-    </div>
+      <div className="pt-16 h-screen">
+        <LibraryPage />
+      </div>
+    </>
   );
 };
 
