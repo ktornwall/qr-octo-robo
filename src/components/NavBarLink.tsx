@@ -1,14 +1,18 @@
 import classnames from "classnames";
 import React from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
   isActive?: boolean;
   label: string;
+  path: string;
   textSize: "sm" | "base";
+
+  onClick?: () => void;
 };
 
 const NavBarLink: React.FunctionComponent<Props> = (props) => {
-  const { isActive, label, textSize } = props;
+  const { isActive, label, path, textSize, onClick } = props;
 
   const classes = classnames(
     isActive
@@ -22,9 +26,9 @@ const NavBarLink: React.FunctionComponent<Props> = (props) => {
   );
 
   return (
-    <a href="#" className={classes}>
+    <Link to={path} className={classes} onClick={onClick}>
       {label}
-    </a>
+    </Link>
   );
 };
 

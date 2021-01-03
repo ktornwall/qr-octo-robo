@@ -1,15 +1,16 @@
 import React from "react";
-import TopNav from "./NavBar";
-import LibraryPage from "./pages/LibraryPage";
+import { BrowserRouter as Router } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Routes from "./Routes";
 
 const App: React.FunctionComponent<{}> = () => {
   return (
-    <>
-      <TopNav />
-      <div className="pt-16 h-screen">
-        <LibraryPage />
-      </div>
-    </>
+    <Router>
+      <NavBar />
+      <main className="pt-16 h-screen">
+        <Routes />
+      </main>
+    </Router>
   );
 };
 
