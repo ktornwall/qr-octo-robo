@@ -14,13 +14,13 @@ const COLORS = {
   ],
 };
 
-type Props = {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: IconDefinition;
   variant?: keyof typeof COLORS;
 };
 
 const Button: React.FunctionComponent<Props> = (props) => {
-  const { icon, variant = "default" } = props;
+  const { className, icon, variant = "default", ...rest } = props;
 
   const variantClasses = COLORS[variant];
 
@@ -29,11 +29,10 @@ const Button: React.FunctionComponent<Props> = (props) => {
       type="button"
       className={classNames(
         "rounded-md px-2 py-1 border text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500",
-        variantClasses
+        variantClasses,
+        className
       )}
-      id="options-menu"
-      aria-haspopup="true"
-      aria-expanded="true"
+      {...rest}
     >
       {icon && <FontAwesomeIcon icon={icon} />}
     </button>
