@@ -29,7 +29,7 @@ const NavBar: React.FunctionComponent<{}> = () => {
 
   return (
     <nav className="fixed w-screen bg-gray-800 shadow-md z-50 md:z-0">
-      <div className="mx-auto px-2 px-6">
+      <div className="mx-auto px-6">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0 flex items-center">
