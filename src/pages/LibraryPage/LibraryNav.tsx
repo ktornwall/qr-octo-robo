@@ -1,7 +1,21 @@
+import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
+import { Barcode } from "../../types/Barcode";
 import LibraryNavItem from "./LibraryNavItem";
 
-const LibraryNav: React.FunctionComponent = () => {
+type Props = {
+  barcodes: Array<Barcode>;
+
+  onAddBarcode: (barcode: Barcode) => void;
+};
+
+const LibraryNav: React.FunctionComponent<Props> = (props) => {
+  const { barcodes, onAddBarcode } = props;
+
+  const handleAddBarcode = () => {
+    onAddBarcode({ id: nanoid(), barcodeType: "qrcode", content: "test" });
+  };
+
   return (
     <div className="flex flex-col flex-nowrap h-full">
       <div className="px-6 py-4 border-b border-gray-300">
@@ -16,7 +30,10 @@ const LibraryNav: React.FunctionComponent = () => {
             placeholder="Add barcode"
             className="flex-grow p-2 text-sm border-t border-b border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
           />
-          <button className="p-2 text-sm text-gray-500 border border-gray-300 rounded-r-md focus:ring-indigo-500 focus:border-indigo-500">
+          <button
+            className="p-2 text-sm text-gray-500 border border-gray-300 rounded-r-md focus:ring-indigo-500 focus:border-indigo-500"
+            onClick={handleAddBarcode}
+          >
             Add
           </button>
         </div>
@@ -24,11 +41,14 @@ const LibraryNav: React.FunctionComponent = () => {
 
       <div className="flex-grow hidden sm:block">
         <div className="h-full overflow-y-auto">
-          <LibraryNavItem
-            barcode={{ barcodeType: "qrcode", content: "test1" }}
-            onClick={() => {}}
-            onDelete={() => {}}
-          />
+          {barcodes.map((barcode) => (
+            <LibraryNavItem
+              key={barcode.id}
+              barcode={barcode}
+              onClick={() => {}}
+              onDelete={() => {}}
+            />
+          ))}
         </div>
       </div>
     </div>
