@@ -1,0 +1,17 @@
+<svg height="512" viewBox="0 0 11 11" width="512"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="qr-corner">
+      <path d="M0 0 v1 h5 v-1 z M5 1 v4 h-1 v-4 z M4 4 v1 h-4 v-1 z M0 4 h1 v-3 h-1 z M2 2 h1 v1 h-1 z" />
+    </symbol>
+
+    <symbol id="octo-robo">
+      <path d="M1 3 v1 h1 v-1 z M0 4 v1 h1 v-1 z M4 3 v1 h1 v-1 z M3 4 v1 h1 v-1 z M3 2 v1 h1 v-1 z M0 2 v1 h1 v-1 z M1 0 v1 h1 v-1 z M4 0 v1 h1 v-1 z" />
+    </symbol>
+  </defs>
+
+  <use href="#qr-corner" x="0" y="0" />
+  <use href="#qr-corner" x="6" y="0" />
+  <use href="#qr-corner" x="0" y="6" />
+  <use href="#octo-robo" x="6" y="6" />
+</svg>
