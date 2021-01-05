@@ -5,6 +5,7 @@ import { Barcode } from "../../types/Barcode";
 
 const defaultProps: Props = {
   barcode: {
+    id: "test-id",
     barcodeType: "qrcode",
     content: "this-is-a-barcode",
   },
@@ -17,6 +18,7 @@ describe("LibraryNavItem", () => {
     describe("rendering the barcode type", () => {
       test("with a qrcode barcode", () => {
         const barcode: Barcode = {
+          id: "test-id",
           barcodeType: "qrcode",
           content: "this-is-a-barcode",
         };
@@ -29,6 +31,7 @@ describe("LibraryNavItem", () => {
 
       test("with a code 128 barcode", () => {
         const barcode: Barcode = {
+          id: "test-id",
           barcodeType: "code128",
           content: "this-is-a-barcode",
         };
@@ -43,6 +46,7 @@ describe("LibraryNavItem", () => {
     describe("rendering the barcode content", () => {
       test("renders the barcode content", () => {
         const barcode: Barcode = {
+          id: "test-id",
           barcodeType: "code128",
           content: "26895",
         };
