@@ -1,4 +1,5 @@
 import React from "react";
+import LibraryContent from "./LibraryPage/LibraryContent";
 import LibraryNav from "./LibraryPage/LibraryNav";
 
 type Props = {};
@@ -9,7 +10,9 @@ const LibraryPage: React.FunctionComponent<Props> = (props) => {
       <div className="sm:w-96 bg-white z-10 shadow-lg">
         <LibraryNav />
       </div>
-      <div className="flex-grow">Barcode grid</div>
+      <div className="flex-grow">
+        <LibraryContent />
+      </div>
     </div>
   );
 };
